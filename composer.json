@@ -1,0 +1,36 @@
+{
+    "name": "bolt/previewlink",
+    "description": "Create public preview links.",
+    "type": "bolt-extension",
+    "keywords": [
+        "public",
+        "links",
+        "preview"
+    ],
+    "require": {
+        "bolt/bolt": "^3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.7"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Néstor de Dios Fernández",
+            "email": "nestor@twokings.nl"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Bolt\\Extension\\Bolt\\PreviewLink\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Bolt\\Extension\\Bolt\\PreviewLink\\Tests\\": "tests",
+            "Bolt\\Tests\\": "vendor/bolt/bolt/tests/phpunit/unit/"
+        }
+    }
+}
