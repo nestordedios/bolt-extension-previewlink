@@ -32,5 +32,8 @@
             "Bolt\\Extension\\Bolt\\PreviewLink\\Tests\\": "tests",
             "Bolt\\Tests\\": "vendor/bolt/bolt/tests/phpunit/unit/"
         }
+    },
+    "extra": {
+        "bolt-class": "Bolt\\Extension\\Bolt\\PreviewLink\\PreviewLinkExtension"
     }
 }
