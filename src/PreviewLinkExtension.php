@@ -28,7 +28,7 @@ class PreviewLinkExtension extends SimpleExtension
         $app = $this->getContainer();
 
         $previeLinkJavaScript = JavaScript::create()
-        ->setFileName('/theme/base-2016/js/extension.js')
+        ->setFileName('extension.js')
         ->setLate(true)
         ->setPriority(5)
         ->setAttributes(['defer', 'async'])
