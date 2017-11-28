@@ -28,7 +28,7 @@ class Key
     public function getKey($contenttypeslug, $id)
     {
         $config = $this->app['previewlink.config'];
-        $salt = $config['key'];
+        $salt = $config['salt'];
         $key = password_hash($contenttypeslug . $id . $salt, PASSWORD_BCRYPT);
 
         return $key;
@@ -37,7 +37,7 @@ class Key
     public function checkKey($contenttypeslug, $id, $hash)
     {
         $config = $this->app['previewlink.config'];
-        $salt = $config['key'];
+        $salt = $config['salt'];
 
         return password_verify($contenttypeslug . $id . $salt, $hash);
     }
