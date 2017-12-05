@@ -13,6 +13,9 @@
                             <button class="btn btn-default" type="button" id="previewlink-copy-button" data-toggle="tooltip" data-placement="bottom" data-copytarget="#previewlink" title="Copy to Clipboard">
                                 <i class="fa fa-clipboard" aria-hidden="true"></i>
                             </button>
+                            <button type="button" class="btn btn-default" id="preview-link-button" data-url="{{ app.request.server.get('HTTP_X_FORWARDED_PROTO') }}://{{ app.request.server.get('HTTP_HOST') }}{{ url }}">
+                                <i class="fa fa-external-link-square"></i> Preview Link
+                            </button>
                         </span>
                     </div>
                     <small id="emailHelp" class="form-text text-muted">Share this link with anyone to preview an unpublished item</small>

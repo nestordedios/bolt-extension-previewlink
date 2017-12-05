@@ -9,8 +9,9 @@
     Copy text to clipboard
   */
 
-  // click event
+  // click events
   document.getElementById("previewlink-copy-button").addEventListener('click', copy);
+  document.getElementById("preview-link-button").addEventListener('click', openPreviewPage);
 
   // event handler
   function copy(e) {
@@ -22,7 +23,7 @@
 
       // select text
       input.select();
-     
+
       try {
         // copy text to clipboard
         document.execCommand('copy');
@@ -33,6 +34,10 @@
 
     }
 
+  }
+
+  function openPreviewPage(e){
+    window.open(this.attr('data-url', '_blank'));
   }
 
 })();
