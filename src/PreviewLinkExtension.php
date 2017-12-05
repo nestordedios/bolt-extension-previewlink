@@ -67,9 +67,16 @@ class PreviewLinkExtension extends SimpleExtension
             'id' => $id,
         ]);
 
-        return $this->renderTemplate('preview_link_widget.twig', [
-            'url' => $url . '?key=' . urlencode($key->getKey($contenttypeslug, $id)),
-        ]);
+        $unpublishedRecord = $app['query']->getContent($contenttypeslug, ['id' => $id, 'status' => '!published']);
+
+        if($unpublishedRecord->count() > 0){
+
+            return $this->renderTemplate('preview_link_widget.twig', [
+                'url' => $url . '?key=' . urlencode($key->getKey($contenttypeslug, $id)),
+            ]);
+
+        }
+
     }
 
     /**
