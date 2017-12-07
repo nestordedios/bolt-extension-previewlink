@@ -19,7 +19,6 @@ use Silex\ControllerCollection;
  */
 class PreviewLinkExtension extends SimpleExtension
 {
-
     /**
      * {@inheritdoc}
      */
@@ -28,20 +27,20 @@ class PreviewLinkExtension extends SimpleExtension
         $app = $this->getContainer();
 
         $previeLinkJavaScript = JavaScript::create()
-        ->setFileName('extension.js')
-        ->setLate(true)
-        ->setPriority(5)
-        ->setAttributes(['defer', 'async'])
-        ->setZone(Zone::BACKEND)
+            ->setFileName('extension.js')
+            ->setLate(true)
+            ->setPriority(5)
+            ->setAttributes(['defer', 'async'])
+            ->setZone(Zone::BACKEND)
         ;
 
         $previewLinkWidget = Widget::create()
-        ->setZone(Zone::BACKEND)
-        ->setLocation(Target::WIDGET_BACK_EDITCONTENT_ASIDE_MIDDLE)
-        ->setCallback([$this, 'callbackWidget'])
-        ->setCallbackArguments(['app' => $app])
-        ->setDefer(false)
-        ->setPriority(5)
+            ->setZone(Zone::BACKEND)
+            ->setLocation(Target::WIDGET_BACK_EDITCONTENT_ASIDE_MIDDLE)
+            ->setCallback([$this, 'callbackWidget'])
+            ->setCallbackArguments(['app' => $app])
+            ->setDefer(false)
+            ->setPriority(5)
         ;
 
         return [
@@ -62,19 +61,22 @@ class PreviewLinkExtension extends SimpleExtension
         $contenttypeslug = $app['request']->get('contenttypeslug');
         $key = new Key($app);
 
-        $url = $app['url_generator']->generate('previewlink', [
-            'contenttypeslug' => $contenttypeslug,
-            'id' => $id,
-        ]);
+        if ($id) {
+            $url = $app['url_generator']->generate('previewlink', [
+                'contenttypeslug' => $contenttypeslug,
+                'id' => $id,
+            ]);
 
-        $unpublishedRecord = $app['query']->getContent($contenttypeslug, ['id' => $id, 'status' => '!published']);
+            $unpublishedRecord = $app['query']->getContent($contenttypeslug, ['id' => $id, 'status' => '!published']);
+        } else {
+            $url = null;
+            $unpublishedRecord = null;
+        }
 
-        if($unpublishedRecord->count() > 0){
-
+        if($url && $unpublishedRecord->count() > 0){
             return $this->renderTemplate('preview_link_widget.twig', [
                 'url' => $url . '?key=' . urlencode($key->getKey($contenttypeslug, $id)),
             ]);
-
         }
 
     }
@@ -93,17 +95,6 @@ class PreviewLinkExtension extends SimpleExtension
 
     /**
      * {@inheritdoc}
-     */
-    // public function getServiceProviders()
-    // {
-    //     return [
-    //         $this,
-    //         new Provider\PreviewLinkProvider(),
-    //     ];
-    // }
-
-    /**
-     * {@inheritdoc}
      *
      * Mount the ExampleController class to all routes that match '/example/url/*'
      *
@@ -117,78 +108,4 @@ class PreviewLinkExtension extends SimpleExtension
         ];
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /**
-     * {@inheritdoc}
-     *
-     * This first route will be handled in this extension class,
-     * then we switch to an extra controller class for the routes.
-     */
-    protected function registerFrontendRoutes(ControllerCollection $collection)
-    {
-        $collection->match('/example/url', [$this, 'routeExampleUrl']);
-    }
-
-    /**
-     * Handles GET requests on the /example/url route.
-     *
-     * @param Request $request
-     *
-     * @return Response
-     */
-    public function routeExampleUrl(Request $request)
-    {
-        $response = new Response('Hello, Bolt!', Response::HTTP_OK);
-
-        return $response;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function registerBackendRoutes(ControllerCollection $collection)
-    {
-        $collection->match('/extend/my-custom-backend-page-route', [$this, 'exampleBackendPage']);
-    }
-
-    /**
-     * Handles GET requests on /bolt/my-custom-backend-page and return a template.
-     *
-     * @param Request $request
-     *
-     * @return string
-     */
-    public function exampleBackendPage(Request $request)
-    {
-        $html = $this->renderTemplate('custom_backend_site.twig', ['title' => 'My Custom Page']);
-
-        return new Markup($html, 'UTF-8');
-    }
 }
