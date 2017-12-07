@@ -10,8 +10,8 @@
   */
 
   // click events
-  document.getElementById("previewlink-copy-button").addEventListener('click', copy);
-  document.getElementById("preview-link-button").addEventListener('click', openPreviewPage);
+  $('#previewlink-copy-button').on('click', copy);
+  $('#preview-link-button').on('click', openPreviewPage);
 
   // event handler
   function copy(e) {
@@ -27,8 +27,7 @@
       try {
         // copy text to clipboard
         document.execCommand('copy');
-      }
-      catch (err) {
+      } catch (err) {
         alert('please press Ctrl/Cmd+C to copy');
       }
 
@@ -37,7 +36,7 @@
   }
 
   function openPreviewPage(e){
-    window.open(this.attr('data-url', '_blank'));
+    window.open($('#previewlink').val(), '_blank');
   }
 
 })();
