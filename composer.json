@@ -34,7 +34,7 @@
         }
     },
     "extra": {
-        "web-assets": "web",
+        "bolt-assets": "web",
         "bolt-class": "Bolt\\Extension\\Bolt\\PreviewLink\\PreviewLinkExtension"
     }
 }
