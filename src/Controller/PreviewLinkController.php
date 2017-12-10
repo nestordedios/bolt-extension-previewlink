@@ -6,6 +6,7 @@ use Bolt\Controller\Base;
 use Bolt\Extension\Bolt\PreviewLink\Key\Key;
 use Silex\ControllerCollection;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Controller class.
