@@ -8,7 +8,7 @@
             <div class="panel-body">
                 <div class="form-group">
                     <div class="input-group">
-                        <input type="text" class="form-control" value="{{ app.request.server.get('HTTP_X_FORWARDED_PROTO') }}://{{ app.request.server.get('HTTP_HOST') }}{{ url }}" id="previewlink">
+                        <input type="text" class="form-control" value="{{ app.request.server.get('HTTPS') ? 'https' : 'http' }}://{{ app.request.server.get('HTTP_HOST') }}{{ url }}" id="previewlink">
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="button" id="previewlink-copy-button" data-toggle="tooltip" data-placement="bottom" data-copytarget="#previewlink" title="Copy to Clipboard">
                                 <i class="fa fa-clipboard" aria-hidden="true"></i>
